@@ -1,20 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-public class FileSystem
-{
-    private class File
+public void Mkdir(string path)
     {
-        public bool IsFile = false;
-        public Dictionary<string, File> Children = new Dictionary<string, File>();
-        public string Content = "";
+        File node = root;
+        string[] dirs = path.Split('/');
+        foreach (string dir in dirs)
+        {
+            if (!node.Children.ContainsKey(dir))
+                node.Children[dir] = new File();
+            node = node.Children[dir];
+        }
     }
-
-    private File root;
-
-    public FileSystem()
-    {
-        root = new File();
-    }
-}
